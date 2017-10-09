@@ -153,7 +153,7 @@ It's nice to include some kind of client-side validation on your form. `Attire` 
 import React from 'react'
 import { Attire, validate } from 'react-attire'
 
-const validateMyForm({name: v => v && v.length > 3})
+const validateMyForm = validate({ name: v => v && v.length > 3 })
 
 class MyForm extends React.Component {
     handleFormSubmit = (data) => {
@@ -193,8 +193,8 @@ Much in the same spirit of validation, form data transformation can be useful wh
 import React from 'react'
 import { Attire, validate, transform } from 'react-attire'
 
-const validateMyForm({ name: v => v && v.length > 3 })
-const transformMyForm({ name: v => v && v.toLowerCase() })
+const validateMyForm = validate({ name: v => v && v.length > 3 })
+const transformMyForm = transform({ name: v => v && v.toLowerCase() })
 
 class MyForm extends React.Component {
     handleFormSubmit = (data) => {
