@@ -1,5 +1,5 @@
 export function transform(rules, data) {
-	const closure = data => {
+	const closure = (data = {}) => {
 		if (!rules || Object.keys(rules).length === 0) {
 			return data
 		}
