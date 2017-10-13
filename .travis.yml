@@ -1,0 +1,11 @@
+dist: precise
+language: node_js
+node_js:
+  - 6
+  - 8
+cache:
+  directories:
+  - node_modules
+install: true
+script:
+ - npm run test
