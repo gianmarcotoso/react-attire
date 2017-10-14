@@ -1,6 +1,6 @@
 {
 	"name": "react-attire",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"description": "A dress code for your React forms",
 	"main": "dist/index.js",
 	"repository": "https://github.com/gianmarcotoso/react-attire",
