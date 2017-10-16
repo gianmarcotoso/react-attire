@@ -1,1 +1,3 @@
 .babelrc
+.DS_Store
+*.swp
