@@ -6,8 +6,7 @@ describe('validate', () => {
 			name: v => v && v.length >= 3
 		}
 
-		expect.assertions(1)
-		return expect(validate(rules, { name: 'billy' })).resolves.toEqual({ name: 'billy' })
+		return expect(validate(rules, { name: 'billy' })).toEqual({ validated: true, status: { name: true } })
 	})
 
 	it('should reject an object that does not follow the rules', () => {
@@ -15,8 +14,7 @@ describe('validate', () => {
 			name: v => v && v.length >= 3
 		}
 
-		expect.assertions(1)
-		return expect(validate(rules, { name: 'yo' })).rejects.toEqual({ name: false })
+		return expect(validate(rules, { name: 'yo' })).toEqual({ validated: false, status: { name: false } })
 	})
 
 	it('should allow validation with a curried function', () => {
@@ -26,15 +24,14 @@ describe('validate', () => {
 
 		const validateName = validate(rules)
 
-		expect.assertions(1)
-		return expect(validateName({ name: 'billy' })).resolves.toEqual({ name: 'billy' })
+		return expect(validateName({ name: 'billy' })).toEqual({ validated: true, status: { name: true } })
 	})
 
 	it('should resolve automatically if no rules are defined', () => {
-		return expect(validate(undefined, { name: 'billy' })).resolves.toEqual({ name: 'billy' })
+		return expect(validate(undefined, { name: 'billy' })).toEqual({ validated: true, status: {} })
 	})
 
 	it('should resolve automatically if the rules are empty', () => {
-		return expect(validate({}, { name: 'billy' })).resolves.toEqual({ name: 'billy' })
+		return expect(validate({}, { name: 'billy' })).toEqual({ validated: true, status: {} })
 	})
 })
