@@ -3,26 +3,18 @@
 	"version": "0.2.0",
 	"description": "A dress code for your React forms",
 	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
 	"repository": "https://github.com/gianmarcotoso/react-attire",
 	"author": "Gian Marco Toso <info@gianmarcotoso.com>",
 	"license": "MIT",
 	"private": false,
 	"jest": {
-		"moduleFileExtensions": [
-			"ts",
-			"tsx",
-			"js",
-			"json"
-		],
-		"testMatch": [
-			"<rootDir>/src/**/*.spec.(ts|tsx|js)"
-		],
+		"moduleFileExtensions": ["ts", "tsx", "js", "json"],
+		"testMatch": ["<rootDir>/src/**/*.spec.(ts|tsx|js)"],
 		"transform": {
 			"^.+\\.(ts|tsx)$": "<rootDir>/preprocessor.js"
 		},
-		"setupFiles": [
-			"<rootDir>/jestSetup.js"
-		]
+		"setupFiles": ["<rootDir>/jestSetup.js"]
 	},
 	"scripts": {
 		"build": "NODE_ENV=production webpack -p --progress --colors",
