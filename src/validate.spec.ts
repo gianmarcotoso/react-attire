@@ -29,12 +29,4 @@ describe('validate', () => {
 		expect.assertions(1)
 		return expect(validateName({ name: 'billy' })).resolves.toEqual({ name: 'billy' })
 	})
-
-	it('should resolve automatically if no rules are defined', () => {
-		return expect(validate(undefined, { name: 'billy' })).resolves.toEqual({ name: 'billy' })
-	})
-
-	it('should resolve automatically if the rules are empty', () => {
-		return expect(validate({}, { name: 'billy' })).resolves.toEqual({ name: 'billy' })
-	})
 })

@@ -4,7 +4,7 @@ var path = require('path')
 module.exports = {
 	context: path.join(__dirname, 'src'),
 	entry: {
-		index: path.join(__dirname, 'src', 'index.js')
+		index: path.join(__dirname, 'src', 'index.ts')
 	},
 	output: {
 		path: path.join(__dirname, 'dist'),
@@ -14,10 +14,16 @@ module.exports = {
 		libraryTarget: 'umd'
 	},
 	module: {
-		rules: [{ test: /\.jsx?$/, exclude: /node_modules/, use: ['babel-loader'] }]
+		rules: [
+			{
+				test: /\.tsx?$/,
+				exclude: /node_modules/,
+				use: ['babel-loader', 'ts-loader']
+			}
+		]
 	},
 	resolve: {
-		extensions: ['.js', '.jsx', '.json'],
+		extensions: ['.ts', '.tsx', '.json'],
 		modules: ['node_modules']
 	},
 	plugins: [

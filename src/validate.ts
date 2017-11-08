@@ -1,4 +1,6 @@
-export function validate(rules, data) {
+function validate(rules: object): (data: object) => object
+function validate(rules: object, data: object): object
+function validate(rules: object, data?: object): object {
 	const closure = data => {
 		return new Promise((resolve, reject) => {
 			if (!rules || Object.keys(rules).length === 0) {
@@ -21,3 +23,5 @@ export function validate(rules, data) {
 
 	return data ? closure(data) : closure
 }
+
+export { validate }

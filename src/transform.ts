@@ -1,4 +1,6 @@
-export function transform(rules, data) {
+function transform(rules: object): (data: object) => object
+function transform(rules: object, data: object): object
+function transform(rules: object, data?: object): object {
 	const closure = (data = {}) => {
 		if (!rules || Object.keys(rules).length === 0) {
 			return data
@@ -8,7 +10,7 @@ export function transform(rules, data) {
 			if (rules[key]) {
 				return {
 					...result,
-					[key]: rules[key].call(this, data[key], data)
+					[key]: rules[key].call(undefined, data[key], data)
 				}
 			}
 
@@ -21,3 +23,5 @@ export function transform(rules, data) {
 
 	return data ? closure(data) : closure
 }
+
+export { transform }

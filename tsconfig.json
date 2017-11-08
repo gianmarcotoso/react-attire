@@ -1,0 +1,9 @@
+{
+	"compilerOptions": {
+		"target": "es2016",
+		"module": "es2015",
+		"jsx": "preserve",
+		"declaration": true,
+		"moduleResolution": "node"
+	}
+}

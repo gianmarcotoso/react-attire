@@ -1,11 +1,7 @@
-import { configure } from 'enzyme'
 import { mount } from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
-import React from 'react'
+import * as React from 'react'
 
 import { Attire } from './Attire'
-
-configure({ adapter: new Adapter() })
 
 describe('Attire', () => {
 	it('should initialize its data with the value of the `initial` prop', () => {
@@ -29,32 +25,58 @@ describe('Attire', () => {
 
 		const mounted = mount(form)
 		mounted.find('input').simulate('change', { target: { name: 'yolo', value: 'yeo' } })
-		expect(mounted.find('input').props().value).toBe('yeo')
+		expect(mounted.state().data.yolo).toBe('yeo')
 	})
 
 	it('should update its data when the onChange callback is called with a property name and a value', () => {
 		const form = (
 			<Attire initial={{ yolo: 'swag' }}>
 				{(data, onChange) => (
-					<input name="yolo" value={data.yolo} onChange={e => onChange(e.target.name, e.target.value)} />
+					<input
+						name="yolo"
+						value={data.yolo}
+						onChange={e => onChange(e.target.name, e.target.value)}
+					/>
 				)}
 			</Attire>
 		)
 
 		const mounted = mount(form)
 		mounted.find('input').simulate('change', { target: { name: 'yolo', value: 'yeo' } })
-		expect(mounted.find('input').props().value).toBe('yeo')
+		expect(mounted.state().data.yolo).toBe('yeo')
+	})
+
+	it('should update its data when the onChange callback is called with a delta object', () => {
+		const form = (
+			<Attire initial={{ yolo: 'swag' }}>
+				{(data, onChange) => (
+					<input
+						name="yolo"
+						value={data.yolo}
+						onChange={e => onChange({ yolo: e.target.value })}
+					/>
+				)}
+			</Attire>
+		)
+
+		const mounted = mount(form)
+		mounted.find('input').simulate('change', { target: { name: 'yolo', value: 'yeo' } })
+		expect(mounted.state().data.yolo).toBe('yeo')
 	})
 
 	it('should correctly handle the cheked property on a checkbox input', () => {
 		const form = (
 			<Attire initial={{ yolo: false }}>
-				{(data, onChange) => <input type="checkbox" name="yolo" checked={data.yolo} onChange={onChange} />}
+				{(data, onChange) => (
+					<input type="checkbox" name="yolo" checked={data.yolo} onChange={onChange} />
+				)}
 			</Attire>
 		)
 
 		const mounted = mount(form)
-		mounted.find('input').simulate('change', { target: { type: 'checkbox', name: 'yolo', checked: true } })
+		mounted
+			.find('input')
+			.simulate('change', { target: { type: 'checkbox', name: 'yolo', checked: true } })
 		expect(mounted.find('input').props().checked).toBe(true)
 	})
 
@@ -73,7 +95,9 @@ describe('Attire', () => {
 		)
 
 		const mounted = mount(form)
-		mounted.find('input').simulate('change', { target: { type: 'checkbox', name: 'yolo', checked: true } })
+		mounted
+			.find('input')
+			.simulate('change', { target: { type: 'checkbox', name: 'yolo', checked: true } })
 		expect(mounted.find('input').props().checked).toBe(true)
 	})
 
@@ -85,12 +109,16 @@ describe('Attire', () => {
 
 		const form = (
 			<Attire initial={{ yolo: false }} onChange={myChange}>
-				{(data, onChange) => <input type="checkbox" name="yolo" checked={data.yolo} onChange={onChange} />}
+				{(data, onChange) => (
+					<input type="checkbox" name="yolo" checked={data.yolo} onChange={onChange} />
+				)}
 			</Attire>
 		)
 
 		const mounted = mount(form)
-		mounted.find('input').simulate('change', { target: { type: 'checkbox', name: 'yolo', checked: true } })
+		mounted
+			.find('input')
+			.simulate('change', { target: { type: 'checkbox', name: 'yolo', checked: true } })
 		expect(flag).toBe(true)
 	})
 
