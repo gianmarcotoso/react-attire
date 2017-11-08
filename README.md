@@ -13,6 +13,8 @@ This package contains a component and some utility functions that should make yo
 npm install --save react-attire
 ```
 
+Typings are bundled within the main package, so they should work out of the box!
+
 ## How does it work?
 
 The `Attire` component uses a [render prop](https://cdb.reacttraining.com/use-a-render-prop-50de598f11ce) to keep track of a form's internal state, providing both the current value of each form element and a callback to change it. 
@@ -73,6 +75,34 @@ This approch also works well when you want to handle subforms that are rendered 
 > 🎓 **Did you know?**
 > 
 > Yes, you can probably use inline functions, [the world is not going to explode](https://cdb.reacttraining.com/react-inline-functions-and-performance-bdff784f5578).
+
+### Changing multiple fields at once
+
+Sometimes it may be useful to change more than one filed at once. You can do so by calling the `onChange` function passing it an object as its only argument; all the object keys will be set/updated on the Attire's instance internal state:
+
+```
+import React from 'react'
+import { Attire } from 'react-attire'
+
+class MyForm extends React.Component {
+    render() {
+        return (
+            <Attire>
+                {(data, onChange) => (
+                    <div>
+                        <label>Your name:</label>
+                        <input type="text" name="name" value={data.name} onChange={(e) => onChange({
+                            name: e.target.value,
+                            random: Math.random()
+                        })} />
+                        {data.random && <p>The latest random number is {data.random}</p>}
+                    </div>
+                )}
+            </Attire>
+        )
+    }
+}
+```
 
 ### Setting the initial state
 
