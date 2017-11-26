@@ -78,7 +78,7 @@ This approch also works well when you want to handle subforms that are rendered 
 
 ### Changing multiple fields at once
 
-Sometimes it may be useful to change more than one filed at once. You can do so by calling the `onChange` function passing it an object as its only argument; all the object keys will be set/updated on the Attire's instance internal state:
+Sometimes it may be useful to change more than one field at once. You can do so by calling the `onChange` function passing it an object as its only argument; all the object keys will be set/updated on the Attire's instance internal state:
 
 ```
 import React from 'react'
