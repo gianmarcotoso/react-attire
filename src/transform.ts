@@ -1,6 +1,8 @@
-function transform(rules: object): (data: object) => object
-function transform(rules: object, data: object): object
-function transform(rules: object, data?: object): object {
+import { TransformRules } from './contracts'
+
+function transform<S = object>(rules: TransformRules<S>): (data: S) => object
+function transform<S = object>(rules: TransformRules<S>, data: S): object
+function transform<S = object>(rules: TransformRules<S>, data?: S): object {
 	const closure = (data = {}) => {
 		if (!rules || Object.keys(rules).length === 0) {
 			return data
