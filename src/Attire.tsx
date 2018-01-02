@@ -4,16 +4,19 @@ import { SyntheticEvent, ReactNode } from 'react'
 import { AttireProps, AttireState } from './contracts'
 import { OnChangeFunction, OnResetFunction, RenderFunction } from './types'
 
-class Attire extends React.Component<AttireProps, AttireState> {
+class Attire<FormState = { [key: string]: any }> extends React.Component<
+	AttireProps<FormState>,
+	AttireState<FormState>
+> {
 	static defaultProps = {
 		initial: {}
 	}
 
-	constructor(props: AttireProps) {
+	constructor(props: AttireProps<FormState>) {
 		super(props)
 
 		this.state = {
-			data: { ...props.initial }
+			data: Object.assign({}, props.initial as FormState)
 		}
 	}
 
@@ -21,7 +24,7 @@ class Attire extends React.Component<AttireProps, AttireState> {
 		const { onChange } = this.props
 
 		this.setState(state => {
-			const data = { ...state.data, ...delta }
+			const data = Object.assign({}, state.data, delta)
 
 			if (onChange) {
 				onChange(data)
@@ -41,7 +44,7 @@ class Attire extends React.Component<AttireProps, AttireState> {
 		this._updateStateWithDelta(delta)
 	}
 
-	handleFormValueChange: OnChangeFunction = (...args: any[]) => {
+	handleFormValueChange: OnChangeFunction<FormState> = (...args: any[]) => {
 		if (args.length === 1) {
 			const [deltaOrEvent] = args
 			if (deltaOrEvent instanceof Event || deltaOrEvent.nativeEvent) {
@@ -64,10 +67,10 @@ class Attire extends React.Component<AttireProps, AttireState> {
 
 		this.setState(state => {
 			if (onChange) {
-				onChange({ ...initial })
+				onChange(initial as FormState)
 			}
 
-			return { data: { ...initial } }
+			return { data: initial }
 		})
 	}
 

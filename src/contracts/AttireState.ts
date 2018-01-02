@@ -1,7 +1,5 @@
-import { Data } from './Data'
-
-interface AttireState {
-	data: Data
+interface AttireState<FormState> {
+	data: FormState
 }
 
 export { AttireState }
