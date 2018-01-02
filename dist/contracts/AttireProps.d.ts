@@ -1,8 +1,7 @@
-import { Data } from './Data';
 import { RenderFunction } from '../types/RenderFunction';
-interface AttireProps {
-    initial: Data;
-    onChange?(data: Data): void;
-    children: RenderFunction;
+interface AttireProps<FormState> {
+    initial?: Partial<FormState>;
+    onChange?(data: FormState): void;
+    children: RenderFunction<FormState>;
 }
 export { AttireProps };
