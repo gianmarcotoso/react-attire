@@ -1,6 +1,6 @@
 {
 	"name": "react-attire",
-	"version": "0.2.0",
+	"version": "0.3.2",
 	"description": "A dress code for your React forms",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
@@ -9,12 +9,21 @@
 	"license": "MIT",
 	"private": false,
 	"jest": {
-		"moduleFileExtensions": ["ts", "tsx", "js", "json"],
-		"testMatch": ["<rootDir>/src/**/*.spec.(ts|tsx|js)"],
+		"moduleFileExtensions": [
+			"ts",
+			"tsx",
+			"js",
+			"json"
+		],
+		"testMatch": [
+			"<rootDir>/src/**/*.spec.(ts|tsx|js)"
+		],
 		"transform": {
 			"^.+\\.(ts|tsx)$": "<rootDir>/preprocessor.js"
 		},
-		"setupFiles": ["<rootDir>/jestSetup.js"]
+		"setupFiles": [
+			"<rootDir>/jestSetup.js"
+		]
 	},
 	"scripts": {
 		"build": "NODE_ENV=production webpack -p --progress --colors",
