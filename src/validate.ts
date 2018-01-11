@@ -1,8 +1,8 @@
 import { ValidationRules } from './contracts'
 
-function validate<S = object>(rules: ValidationRules<S>): (data: S) => object
-function validate<S = object>(rules: ValidationRules<S>, data: S): object
-function validate<S = object>(rules: ValidationRules<S>, data?: S): object {
+function validate<S = object>(rules: ValidationRules<S>): (data: S) => Promise<object>
+function validate<S = object>(rules: ValidationRules<S>, data: S): Promise<object>
+function validate<S = object>(rules: ValidationRules<S>, data?: S): any {
 	const closure = data => {
 		return new Promise((resolve, reject) => {
 			if (!rules || Object.keys(rules).length === 0) {
