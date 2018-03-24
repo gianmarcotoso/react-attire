@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/gianmarcotoso/react-attire.svg?branch=master)](https://travis-ci.org/gianmarcotoso/react-attire)
 [![npm version](https://badge.fury.io/js/react-attire.svg)](https://badge.fury.io/js/react-attire)
+[![CryptoTip](https://img.shields.io/badge/Donate%20with-CryptoTip-blue.svg?style=flat&colorB=007bff)](https://cryptotip.it/p/gianmarcotoso)
 
 # Attire
 
