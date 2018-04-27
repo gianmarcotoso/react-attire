@@ -12,6 +12,13 @@ class Attire<FormState = { [key: string]: any }> extends React.Component<
 		initial: {}
 	}
 
+	componentDidUpdate(prevProps: AttireProps<FormState>) {
+		if (prevProps.initial !== this.props.initial) {
+			const data = this.props.onInitialChange(this.state.data, prevProps.initial)
+			this._updateStateWithDelta(data as Partial<FormState>)
+		}
+	}
+
 	constructor(props: AttireProps<FormState>) {
 		super(props)
 
@@ -70,16 +77,12 @@ class Attire<FormState = { [key: string]: any }> extends React.Component<
 				onChange(initial as FormState)
 			}
 
-			return { data: initial }
+			return { data: initial as FormState }
 		})
 	}
 
 	render() {
-		return this.props.children(
-			this.state.data,
-			this.handleFormValueChange,
-			this.handleFormReset
-		)
+		return this.props.children(this.state.data, this.handleFormValueChange, this.handleFormReset)
 	}
 }
 

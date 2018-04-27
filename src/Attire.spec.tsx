@@ -35,7 +35,7 @@ describe('Attire', () => {
 					<input
 						name="yolo"
 						value={data.yolo}
-						onChange={e => onChange(e.target.name, e.target.value)}
+						onChange={e => onChange(e.target.name as any, e.target.value)}
 					/>
 				)}
 			</Attire>
@@ -50,11 +50,7 @@ describe('Attire', () => {
 		const form = (
 			<Attire initial={{ yolo: 'swag' }}>
 				{(data, onChange) => (
-					<input
-						name="yolo"
-						value={data.yolo}
-						onChange={e => onChange({ yolo: e.target.value })}
-					/>
+					<input name="yolo" value={data.yolo} onChange={e => onChange({ yolo: e.target.value })} />
 				)}
 			</Attire>
 		)
@@ -67,16 +63,12 @@ describe('Attire', () => {
 	it('should correctly handle the cheked property on a checkbox input', () => {
 		const form = (
 			<Attire initial={{ yolo: false }}>
-				{(data, onChange) => (
-					<input type="checkbox" name="yolo" checked={data.yolo} onChange={onChange} />
-				)}
+				{(data, onChange) => <input type="checkbox" name="yolo" checked={data.yolo} onChange={onChange} />}
 			</Attire>
 		)
 
 		const mounted = mount(form)
-		mounted
-			.find('input')
-			.simulate('change', { target: { type: 'checkbox', name: 'yolo', checked: true } })
+		mounted.find('input').simulate('change', { target: { type: 'checkbox', name: 'yolo', checked: true } })
 		expect(mounted.find('input').props().checked).toBe(true)
 	})
 
@@ -88,16 +80,14 @@ describe('Attire', () => {
 						type="checkbox"
 						name="yolo"
 						checked={data.yolo}
-						onChange={e => onChange(e.target.name, e.target.checked)}
+						onChange={e => onChange(e.target.name as any, e.target.checked)}
 					/>
 				)}
 			</Attire>
 		)
 
 		const mounted = mount(form)
-		mounted
-			.find('input')
-			.simulate('change', { target: { type: 'checkbox', name: 'yolo', checked: true } })
+		mounted.find('input').simulate('change', { target: { type: 'checkbox', name: 'yolo', checked: true } })
 		expect(mounted.find('input').props().checked).toBe(true)
 	})
 
@@ -109,16 +99,12 @@ describe('Attire', () => {
 
 		const form = (
 			<Attire initial={{ yolo: false }} onChange={myChange}>
-				{(data, onChange) => (
-					<input type="checkbox" name="yolo" checked={data.yolo} onChange={onChange} />
-				)}
+				{(data, onChange) => <input type="checkbox" name="yolo" checked={data.yolo} onChange={onChange} />}
 			</Attire>
 		)
 
 		const mounted = mount(form)
-		mounted
-			.find('input')
-			.simulate('change', { target: { type: 'checkbox', name: 'yolo', checked: true } })
+		mounted.find('input').simulate('change', { target: { type: 'checkbox', name: 'yolo', checked: true } })
 		expect(flag).toBe(true)
 	})
 
@@ -140,5 +126,50 @@ describe('Attire', () => {
 
 		mounted.find('button').simulate('click', {})
 		expect(mounted.find('input').props().value).toBe('hello')
+	})
+
+	it('should call onInitialChange when the value of the initial prop changes', () => {
+		const initialOne = {
+			test: 'hello'
+		}
+
+		const initialTwo = {
+			test: 'hohoho'
+		}
+
+		let flip = false
+		const onInitialChange = (data, prevInitial) => {
+			flip = true
+
+			return {
+				test: 12
+			}
+		}
+
+		const Form = class extends React.Component {
+			state = {
+				currentInitial: initialOne
+			}
+
+			render() {
+				return (
+					<div>
+						<button id="change" onClick={() => this.setState({ currentInitial: initialTwo })} />
+						<Attire onInitialChange={onInitialChange} initial={this.state.currentInitial}>
+							{(data, onChange) => (
+								<div>
+									<input type="checkbox" name="test" value={data.test} onChange={onChange} />
+								</div>
+							)}
+						</Attire>
+					</div>
+				)
+			}
+		}
+
+		const mounted = mount(<Form />)
+		mounted.find('#change').simulate('click')
+		expect(mounted.find('input').props().value).toBe(12)
+		expect(flip).toBe(true)
 	})
 })
