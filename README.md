@@ -26,7 +26,7 @@ Attire works by hiding the form's state management behind the `Attire` component
 
 Here's a simple example:
 
-```js
+```jsx
 import React from 'react'
 import { Attire } from 'react-attire'
 
@@ -50,7 +50,7 @@ class MyForm extends React.Component {
 
 There are cases when you won't use regular `input`s, but some other, more exotic controls (think of a custom datepicker, for example). In these cases, you can call Attire's `onChange` callback by explicitly passing both the name and the new value:
 
-```js
+```jsx
 import React from 'react'
 import { Attire } from 'react-attire'
 import { DatePicker } from 'some-datepicker-component'
@@ -81,7 +81,7 @@ This approch also works well when you want to handle subforms that are rendered 
 
 Sometimes it may be useful to change more than one field at once. You can do so by calling the `onChange` function passing it an object as its only argument; all the object keys will be set/updated on the Attire's instance internal state:
 
-```js
+```jsx
 import React from 'react'
 import { Attire } from 'react-attire'
 
@@ -116,7 +116,7 @@ class MyForm extends React.Component {
 
 As with most forms, you'll probably want to initialize it with some values. You can do so by passing an `initial` prop to the `Attire` component:
 
-```js
+```jsx
 import React from 'react'
 import { Attire } from 'react-attire'
 
@@ -140,7 +140,7 @@ class MyForm extends React.Component {
 
 If you want to call a function every time something changes in your form, regardless of which field, you can pass a callback to the `onChange` prop of the `Attire` component. This is **not** the same as the `onChange` callback passed to your render prop! (I might want to change the name of either one at some point, if you have suggestions open an issue):
 
-```js
+```jsx
 import React from 'react'
 import { Attire } from 'react-attire'
 
@@ -164,7 +164,7 @@ class MyForm extends React.Component {
 
 Let's say you want to include a reset button to clear your form. How would you go about clearing a state that is outside of your control? `Attire` provides a third argument to your render prop, a `reset` function you can call to reset the form to its initial state. Calling this function will also trigger the global `onChange` callback if present.
 
-```js
+```jsx
 import React from 'react'
 import { Attire } from 'react-attire'
 
@@ -190,7 +190,7 @@ class MyForm extends React.Component {
 
 Sometimes you might want to react to a change of your initial state (for example when using the same form to edit an element selected from a list). You can pass a callback to the `onInitialChange` prop, which receives both the current form data and the previous initial value as its parameters, and allows you to return a new partial state for the form. This way you can change either the whole state or just a part of it, depending on what your application requirements.
 
-```js
+```jsx
 import React from 'react'
 import { Attire } from 'react-attire'
 
@@ -227,7 +227,7 @@ class MyForm extends React.Component {
 
 It's nice to include some kind of client-side validation on your form. `Attire` makes no assumption on how your data should be validated, but I've included a `validate` function that you can use to add some validation logic; if you need a more complex solution, you can of course use an external library:
 
-```js
+```jsx
 import React from 'react'
 import { Attire, validate } from 'react-attire'
 
@@ -267,7 +267,7 @@ The function accepts an object that defines validation rules for any one of the 
 
 Much in the same spirit of validation, form data transformation can be useful whenever you want the data your user has entered to be transformed before being used. While you can do this manually, I've included a `transform` function that you can use:
 
-```js
+```jsx
 import React from 'react'
 import { Attire, validate, transform } from 'react-attire'
 
@@ -308,13 +308,13 @@ class MyForm extends React.Component {
 
 If some of your input values are undefined, React will complain that your inputs are changing from being uncontrolled to being controlled. You can avoid this by simply using an initial value or by using the `||` notation:
 
-```js
+```jsx
 <input value={data.value || ''} />
 ```
 
 Since this is ugly to see, I have provided a `value` function that does this for you:
 
-```js
+```jsx
 import React from 'react'
 import { Attire, value } from 'react-attire'
 
