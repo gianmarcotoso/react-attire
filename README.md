@@ -345,4 +345,3 @@ This was mostly a PoC I've made to see how render props fit in the "form" use ca
 ## License
 
 MIT
-
