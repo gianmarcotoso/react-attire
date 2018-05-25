@@ -9,6 +9,7 @@ declare class Attire<FormState = {
     static defaultProps: {
         initial: {};
     };
+    componentDidUpdate(prevProps: AttireProps<FormState>): void;
     constructor(props: AttireProps<FormState>);
     private _updateStateWithDelta(delta);
     _handleFormValueChangeEvent(event: Event | SyntheticEvent<HTMLInputElement>): void;
