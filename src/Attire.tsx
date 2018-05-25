@@ -14,8 +14,11 @@ class Attire<FormState = { [key: string]: any }> extends React.Component<
 
 	componentDidUpdate(prevProps: AttireProps<FormState>) {
 		if (prevProps.initial !== this.props.initial) {
-			const data = this.props.onInitialChange(this.state.data, prevProps.initial)
-			this._updateStateWithDelta(data as Partial<FormState>)
+			const data = this.props.onInitialChange(this.state.data, prevProps.initial, this.props.initial)
+
+			if (data) {
+				this._updateStateWithDelta(data as Partial<FormState>)
+			}
 		}
 	}
 
