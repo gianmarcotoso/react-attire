@@ -13,7 +13,7 @@ class Attire<FormState = { [key: string]: any }> extends React.Component<
 	}
 
 	componentDidUpdate(prevProps: AttireProps<FormState>) {
-		if (prevProps.initial !== this.props.initial) {
+		if (prevProps.initial !== this.props.initial && this.props.onInitialChange) {
 			const data = this.props.onInitialChange(this.state.data, prevProps.initial, this.props.initial)
 
 			if (data) {
