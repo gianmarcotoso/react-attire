@@ -340,7 +340,7 @@ That's about it! :)
 
 This was mostly a PoC I've made to see how render props fit in the "form" use case. If you see something you don't like or think that something is broken, please open an issue or better yet, make a PR!
 
-🍻 If you use this and you like it, consider buying me a beer by using the CryptoTip button above! 🍻
+🍻 If you use this and you like it, consider buying me a beer by sending BTC to 3NFMFZrWGszYThP3MQsuPgJc2S8R6WinJe :)
 
 ## License
 
