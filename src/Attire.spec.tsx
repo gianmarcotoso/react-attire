@@ -24,8 +24,8 @@ describe('Attire', () => {
 		)
 
 		const mounted = mount(form)
-		const { data } = mounted.state() as any
 		mounted.find('input').simulate('change', { target: { name: 'yolo', value: 'yeo' } })
+		const { data } = mounted.state() as any
 		expect(data.yolo).toBe('yeo')
 	})
 
@@ -43,8 +43,8 @@ describe('Attire', () => {
 		)
 
 		const mounted = mount(form)
-		const { data } = mounted.state() as any
 		mounted.find('input').simulate('change', { target: { name: 'yolo', value: 'yeo' } })
+		const { data } = mounted.state() as any
 		expect(data.yolo).toBe('yeo')
 	})
 
@@ -95,10 +95,7 @@ describe('Attire', () => {
 	})
 
 	it('should call the global onChange callback when something changes', () => {
-		let flag = false
-		const myChange = data => {
-			flag = true
-		}
+		const myChange = jest.fn()
 
 		const form = (
 			<Attire initial={{ yolo: false }} onChange={myChange}>
@@ -108,7 +105,7 @@ describe('Attire', () => {
 
 		const mounted = mount(form)
 		mounted.find('input').simulate('change', { target: { type: 'checkbox', name: 'yolo', checked: true } })
-		expect(flag).toBe(true)
+		expect(myChange).toHaveBeenCalled()
 	})
 
 	it('should reset the form to its initial value when the `reset` callback is called', () => {
@@ -131,23 +128,19 @@ describe('Attire', () => {
 		expect(mounted.find('input').props().value).toBe('hello')
 	})
 
-	it('should call onInitialChange when the value of the initial prop changes', () => {
+	it('should call onInitialChange and completely replace the state when the value of the initial prop changes', () => {
 		const initialOne = {
-			test: 'hello'
+			test: 'hello',
+			anotherOne: 'yooo'
 		}
 
 		const initialTwo = {
 			test: 'hohoho'
 		}
 
-		let flip = false
-		const onInitialChange = (data, prevInitial) => {
-			flip = true
-
-			return {
-				test: 12
-			}
-		}
+		const onInitialChange = jest.fn((data, prevInitial) => {
+			return initialTwo
+		})
 
 		const Form = class extends React.Component {
 			state = {
@@ -172,7 +165,13 @@ describe('Attire', () => {
 
 		const mounted = mount(<Form />)
 		mounted.find('#change').simulate('click')
-		expect(mounted.find('input').props().value).toBe(12)
-		expect(flip).toBe(true)
+
+		const { data } = mounted
+			.children()
+			.find(Attire)
+			.state() as any
+		expect(data.test).toEqual(initialTwo.test)
+		expect(data.anotherOne).toBeUndefined()
+		expect(onInitialChange).toHaveBeenCalled()
 	})
 })
