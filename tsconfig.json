@@ -3,6 +3,7 @@
 		"target": "es2016",
 		"module": "es2015",
 		"jsx": "preserve",
+		"outDir": "dist",
 		"declaration": true,
 		"moduleResolution": "node"
 	}

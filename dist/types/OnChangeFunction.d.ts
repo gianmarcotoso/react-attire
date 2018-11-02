@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { SyntheticEvent } from 'react';
 declare type OnChangeFunction<FormState> = {
     (event: Event | SyntheticEvent<HTMLInputElement>): void;

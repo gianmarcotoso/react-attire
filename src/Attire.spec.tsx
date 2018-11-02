@@ -24,8 +24,9 @@ describe('Attire', () => {
 		)
 
 		const mounted = mount(form)
+		const { data } = mounted.state() as any
 		mounted.find('input').simulate('change', { target: { name: 'yolo', value: 'yeo' } })
-		expect(mounted.state().data.yolo).toBe('yeo')
+		expect(data.yolo).toBe('yeo')
 	})
 
 	it('should update its data when the onChange callback is called with a property name and a value', () => {
@@ -42,8 +43,9 @@ describe('Attire', () => {
 		)
 
 		const mounted = mount(form)
+		const { data } = mounted.state() as any
 		mounted.find('input').simulate('change', { target: { name: 'yolo', value: 'yeo' } })
-		expect(mounted.state().data.yolo).toBe('yeo')
+		expect(data.yolo).toBe('yeo')
 	})
 
 	it('should update its data when the onChange callback is called with a delta object', () => {
@@ -57,7 +59,8 @@ describe('Attire', () => {
 
 		const mounted = mount(form)
 		mounted.find('input').simulate('change', { target: { name: 'yolo', value: 'yeo' } })
-		expect(mounted.state().data.yolo).toBe('yeo')
+		const { data } = mounted.state() as any
+		expect(data.yolo).toBe('yeo')
 	})
 
 	it('should correctly handle the cheked property on a checkbox input', () => {

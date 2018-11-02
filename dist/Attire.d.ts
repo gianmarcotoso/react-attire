@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import * as React from 'react';
 import { SyntheticEvent } from 'react';
 import { AttireProps, AttireState } from './contracts';
@@ -11,7 +10,7 @@ declare class Attire<FormState = {
     };
     componentDidUpdate(prevProps: AttireProps<FormState>): void;
     constructor(props: AttireProps<FormState>);
-    private _updateStateWithDelta(delta);
+    private _updateStateWithDelta;
     _handleFormValueChangeEvent(event: Event | SyntheticEvent<HTMLInputElement>): void;
     handleFormValueChange: OnChangeFunction<FormState>;
     handleFormReset: OnResetFunction;
