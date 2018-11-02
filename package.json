@@ -1,6 +1,6 @@
 {
 	"name": "react-attire",
-	"version": "0.4.3",
+	"version": "1.0.0",
 	"description": "A dress code for your React forms",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
