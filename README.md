@@ -187,7 +187,7 @@ class MyForm extends React.Component {
 
 ### Handling initial data change
 
-Sometimes you might want to react to a change of your initial state (for example when using the same form to edit an element selected from a list). You can pass a callback to the `onInitialChange` prop, which receives the current form data, the previous initial value and the new initial value as its parameters, and allows you to return a new partial state for the form (or `false` if you don't want the state to change). This way you can change either the whole state or just a part of it, depending on what your application requirements.
+Sometimes you might want to react to a change of your initial state (for example when using the same form to edit an element selected from a list). You can pass a callback to the `onInitialChange` prop, which receives the current form data, the previous initial value and the new initial value as its parameters, and allows you to return a new state for the form (or `false` if you don't want the state to change). The previous state will be **completely** replaced be the one returned by this callback.
 
 ```jsx
 import React from 'react'
